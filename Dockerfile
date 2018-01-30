@@ -21,7 +21,6 @@ RUN apt-get -y install oracle-java8-installer
 RUN apt-get install oracle-java8-set-default
 RUN which java 
 
-
 RUN apt-get install unzip
 
 # Install Android SDK
@@ -38,8 +37,11 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools/bin
 RUN ls -lart /opt/android-sdk-linux/tools 
 
 RUN yes | sdkmanager --licenses
-RUN sdkmanager "platform-tools" "platforms;android-26"
+RUN sdkmanager "platform-tools" "platforms;android-27"
 
 # Cleaning
+# TODO reduce the image size , need to uninstall old sdk 
+#RUN sdkmanager "platform-tools" "platforms;android-26"
+RUN apt-get -y purge --auto-remove unzip 
 RUN apt-get clean
 
